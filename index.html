@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleopatra's Secret | Instagram</title>
+    
+    <!-- Universal Links для Instagram -->
+    <meta property="al:ios:url" content="instagram://user?username=cleopatrass.secret" />
+    <meta property="al:ios:app_store_id" content="389801252" />
+    <meta property="al:ios:app_name" content="Instagram" />
+    <meta property="al:android:url" content="instagram://user?username=cleopatrass.secret" />
+    <meta property="al:android:app_name" content="Instagram" />
+    <meta property="al:android:package" content="com.instagram.android" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #833AB4, #E1306C, #F77737);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .username {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #E1306C, #C13584);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(225, 48, 108, 0.3);
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+            font-size: 14px;
+            color: #555;
+        }
+        
+        .instructions h3 {
+            color: #E1306C;
+            margin-bottom: 10px;
+        }
+        
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #E1306C;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="avatar">👑</div>
+        <h1>Cleopatra's Secret</h1>
+        <p class="username">@cleopatrass.secret</p>
+        
+        <!-- Кнопка для редиректа на Beacons -->
+        <a href="https://beacons.ai/cleopatrass.secret" class="btn" id="beaconsBtn">
+                    📱 Открыть Instagram
+        </a>
+        
+        <!-- Инструкция -->
+        <div class="instructions">
+            <h3>Если не открывается:</h3>
+            <p>1. Нажмите ⋮ (три точки) вверху</p>
+            <p>2. Выберите "Открыть в браузере"</p>
+            <p>3. Нажмите кнопку выше ещё раз</p>
+        </div>
+        
+        <!-- Лоадер (показывается при переходе) -->
+        <div class="loader hidden" id="loader"></div>
+    </div>
+
+    <script>
+        // Прямой редирект на Beacons при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Если это не TikTok (или для теста), показываем кнопку
+            if (!navigator.userAgent.includes('TikTok')) {
+                // Пробуем сразу открыть Instagram
+                window.location.href = "instagram://user?username=cleopatrass.secret";
+                
+                // Если через 0.5 секунды не открылось, показываем кнопку Beacons
+                setTimeout(function() {
+                    document.getElementById('beaconsBtn').classList.remove('hidden');
+                }, 500);
+            }
+        });
+        
+        // При клике на кнопку показываем лоадер
+        document.getElementById('beaconsBtn').addEventListener('click', function(e) {
+            document.getElementById('loader').classList.remove('hidden');
+            this.classList.add('hidden');
+            document.querySelector('.instructions').classList.add('hidden');
+        });
+        
+        // Авто-редирект для TikTok (через 1 секунду)
+        setTimeout(function() {
+            if (navigator.userAgent.includes('TikTok')) {
+                window.location.href = "https://beacons.ai/cleopatrass.secret";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
